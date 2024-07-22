@@ -5,34 +5,28 @@ class ProductManager {
     }
 
     addProduct(title, description, price, thumbnail, code, stock) {
-      
         if (!title || !description || !price || !thumbnail || !code || !stock) {
             console.error("Todos os campos são obrigatórios");
             return;
         }
-
         if (this.products.some(product => product.code === code)) {
             console.error(`Código ${code} já existe`);
             return;
         }
-
-        
         const product = {
             id: this.nextId,
-            title: title,
-            description: description,
-            price: price,
-            thumbnail: thumbnail,
-            code: code,
-            stock: stock
+            title,
+            description,
+            price,
+            thumbnail,
+            code,
+            stock
         };
-
         this.products.push(product);
         this.nextId += 1;
     }
 
     getProductById(id) {
-        // Procura o produto pelo id
         const product = this.products.find(product => product.id === id);
         if (!product) {
             console.error("Não encontrado");
@@ -46,5 +40,5 @@ const manager = new ProductManager();
 manager.addProduct("Produto 1", "Descrição do Produto 1", 10.99, "/caminho/para/imagem1.jpg", "codigo1", 100);
 manager.addProduct("Produto 2", "Descrição do Produto 2", 15.99, "/caminho/para/imagem2.jpg", "codigo2", 50);
 
-console.log(manager.getProductById(1));  // Deve retornar o primeiro produto
-console.log(manager.getProductById(3));  // Deve imprimir "Não encontrado" no console
+console.log(manager.getProductById(1));
+console.log(manager.getProductById(3));
